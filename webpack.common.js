@@ -64,11 +64,36 @@ const config = {
       './utils.web.js'
     ),
     new WorkboxPlugin.GenerateSW({
-      // these options encourage the ServiceWorkers to get in there fast
-      // and not allow any straggling "old" SWs to hang around
       clientsClaim: true,
       skipWaiting: true,
-      include: ['index.html', 'manifest.json'] // not caching a lot as anyway this works only online
+      include: [
+        'index.html',
+        'manifest.json',
+        'styles.css',
+        'index.js',
+        'favicon.png',
+        'favicon.ico',
+        'worker.js',
+        'config.json',
+        'textures/**',
+        'blocksStates/**',
+        'extra-textures/**',
+        'assets/**'
+      ],
+      runtimeCaching: [
+        {
+          urlPattern: /\.(?:js|css|html|json|png|svg|ico|webp|jpg|jpeg)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'static-resources',
+            expiration: {
+              maxEntries: 200,
+              maxAgeSeconds: 30 * 24 * 60 * 60
+            }
+          }
+        }
+      ],
+      navigateFallback: 'index.html'
     }),
     new CopyPlugin({
       patterns: [

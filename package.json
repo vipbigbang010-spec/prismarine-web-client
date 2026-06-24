@@ -11,6 +11,11 @@
     "prod-start": "node server.js",
     "build-dev-start": "npm run build-dev && npm run prod-start",
     "build-start": "npm run build && npm run prod-start",
+    "build:pwa": "npm run build",
+    "android:init": "npx cap init prismarine-web-client com.prismarinejs.prismarinewebclient --web-dir=public",
+    "android:add": "npx cap add android",
+    "android:sync": "npm run build && npx cap sync android",
+    "android:open": "npx cap open android",
     "prepublishOnly": "npm run build",
     "lint": "standard",
     "fix": "standard --fix",
@@ -74,6 +79,9 @@
     "webpack-dev-middleware": "^6.0.0",
     "webpack-dev-server": "^4.0.0",
     "webpack-merge": "^5.7.3",
-    "workbox-webpack-plugin": "^6.1.2"
+    "workbox-webpack-plugin": "^6.1.2",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
   }
 }
